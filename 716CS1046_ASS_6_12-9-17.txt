@@ -1,0 +1,81 @@
+		
+		                        *********ASSIGNMENT-6**********
+
+create table department(
+dept_no number(2),
+dept_name varchar2(15),
+dept_loc varchar2(10)
+);
+
+insert into department values(1,'cse','a1');
+insert into department values(2,'ece','a2');
+insert into department values(3,'ee','a3');
+insert into department values(4,'me','b1');
+insert into department values(5,'fp','c1');
+
+select * from department;
+
+create table employee(
+emp_id number(2),
+emp_name varchar2(15),
+emp_salary number(9,2)
+);
+
+insert into employee values(1,'a',1000000);
+insert into employee values(2,'d',2000000);
+insert into employee values(3,'g',150000);
+insert into employee values(4,'j',25000);
+
+create user mapanip identified by userid1;
+
+
+grant create user to cse container=all;
+
+connect to sysdba identified by tiger;
+
+create or replace
+procedure insert_num(p_num number,user varchar2)is
+begin
+insert into employee(emp_id,emp_name) values(p_num,user);
+end insert_num;
+
+begin
+insert_num(5,'mno');
+end;
+
+select * from employees;
+
+CREATE OR REPLACE FUNCTION totalCustomers RETURN number IS
+ total number(2) := 0;
+BEGIN
+ SELECT count(*) into total 
+ FROM department;
+
+ RETURN total;
+END;
+
+declare c number(2);
+
+begin
+c:=totalCustomers();
+dbms_output.put_line('Total no. of Customers: ' || c);
+end;
+
+
+
+select * from employee;
+create function fact4( p2_n in number )
+      return number
+    is
+    begin
+     if( p2_n <= 1 )
+     then
+       return 1;
+      else
+        return p2_n * fact4( p2_n - 1 );
+     end if;
+   end;
+
+begin
+dbms_output.put_line('Factorial: ' || fact4(3));
+end;
